@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蕭宥瑄的暖色慢調時光 | Aesthetic Time Hub</title>
+  <meta name="description" content="專為蕭宥瑄打造的日系暖色文青時光首頁，融合溫潤紙感、典雅宋體與慢調生活美學。">
+  <!-- Google Fonts: 引入思源宋體 (Noto Serif TC)、古典襯線 (Cormorant Garamond) 與等寬數字 (JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:ital,wght@0,300;0,500;0,700;1,400&family=Noto+Serif+TC:wght@300;400;600;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="warm-latte">
+  <!-- 暖色流光背景、溫潤光暈與復古微紋理 -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="paper-texture"></div>
+  </div>
+
+  <!-- 主要應用容器 -->
+  <div class="app-wrapper">
+    <!-- 頂部導航列 -->
+    <header class="app-header">
+      <div class="brand-badge">
+        <span class="live-pulse"></span>
+        <span class="brand-text">TEA &amp; TIMEFLOW &bull; 慢調時光</span>
+      </div>
+
+      <div class="header-controls">
+        <!-- 暖色文青主題切換 -->
+        <div class="dropdown-container">
+          <button id="themeMenuBtn" class="control-btn" title="切換色彩風格" aria-label="切換主題">
+            <i data-lucide="palette"></i>
+            <span class="btn-label" id="currentThemeName">暖陽燕麥</span>
+            <i data-lucide="chevron-down" class="dropdown-arrow"></i>
+          </button>
+          <div id="themeDropdown" class="theme-dropdown hidden">
+            <button class="theme-option active" data-theme-id="warm-latte">
+              <span class="theme-preview-dot" style="background: linear-gradient(135deg, #f7d6b8, #c87d55);"></span>
+              暖陽燕麥 (Warm Latte)
+            </button>
+            <button class="theme-option" data-theme-id="amber-twilight">
+              <span class="theme-preview-dot" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></span>
+              琥珀暮色 (Amber Twilight)
+            </button>
+            <button class="theme-option" data-theme-id="matcha-tea">
+              <span class="theme-preview-dot" style="background: linear-gradient(135deg, #8a9a5b, #c2a68c);"></span>
+              京都茶室 (Tea &amp; Wood)
+            </button>
+            <button class="theme-option" data-theme-id="vintage-kraft">
+              <span class="theme-preview-dot" style="background: linear-gradient(135deg, #e3caa5, #b85d38);"></span>
+              復古暖紙 (Vintage Kraft)
+            </button>
+            <button class="theme-option" data-theme-id="warm-espresso">
+              <span class="theme-preview-dot" style="background: linear-gradient(135deg, #3d2c24, #d4956a);"></span>
+              靜夜深焙 (Dark Espresso)
+            </button>
+          </div>
+        </div>
+
+        <!-- 12/24 小時制切換 -->
+        <button id="formatToggleBtn" class="control-btn" title="切換 12/24 小時制" aria-label="切換小時制">
+          <span id="formatBadge" class="format-badge">24H</span>
+        </button>
+
+        <!-- 全螢幕沈浸模式 -->
+        <button id="fullscreenBtn" class="control-btn" title="切換全螢幕沈浸模式" aria-label="切換全螢幕">
+          <i data-lucide="maximize" id="fullscreenIcon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- 核心視覺時鐘卡片 -->
+    <main class="clock-stage">
+      <div class="glass-card" id="mainCard">
+        <!-- 卡片頂部：時段問候與個性化姓名 -->
+        <div class="greeting-section">
+          <div class="greeting-pill" id="greetingPill">
+            <span class="greeting-icon" id="greetingIcon">☕</span>
+            <span id="greetingText">日日是好日，時光知味，歲月凝香</span>
+          </div>
+
+          <!-- 姓名展示與即時修改區 -->
+          <div class="name-container">
+            <div class="avatar-ring">
+              <span class="avatar-letter" id="avatarLetter">蕭</span>
+            </div>
+            <div class="name-content">
+              <div class="name-display-row">
+                <h1 class="user-name" id="userNameDisplay">蕭宥瑄</h1>
+                <button id="editNameBtn" class="edit-badge" title="點擊修改姓名與題字" aria-label="修改姓名">
+                  <i data-lucide="pencil"></i>
+                  <span>自訂題字</span>
+                </button>
+              </div>
+              <p class="user-subtitle" id="userMotto">慢品人間煙火色，閒觀萬事歲月長</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 巨型時間展示核心 -->
+        <div class="clock-display" aria-live="off">
+          <div class="time-block">
+            <span class="time-digit" id="hours">15</span>
+            <span class="time-label">時辰</span>
+          </div>
+          <span class="time-separator" id="separator1">:</span>
+          <div class="time-block">
+            <span class="time-digit" id="minutes">14</span>
+            <span class="time-label">分秒</span>
+          </div>
+          <span class="time-separator" id="separator2">:</span>
+          <div class="time-block">
+            <span class="time-digit" id="seconds">20</span>
+            <span class="time-label">瞬息</span>
+          </div>
+
+          <!-- AM/PM 標記 -->
+          <div class="period-badge" id="periodBadge">PM</div>
+        </div>
+
+        <!-- 日期與詳細曆法列 -->
+        <div class="date-row">
+          <div class="date-item primary-date">
+            <i data-lucide="calendar"></i>
+            <span id="fullDateDisplay">2026年9月16日 星期三</span>
+          </div>
+          <div class="date-divider"></div>
+          <div class="date-item secondary-meta">
+            <i data-lucide="clock"></i>
+            <span id="timezoneBadge">台北時間 (GMT+8)</span>
+          </div>
+          <div class="date-divider"></div>
+          <div class="date-item secondary-meta">
+            <i data-lucide="compass"></i>
+            <span id="dayOfYearBadge">歲稔 第 259 天</span>
+          </div>
+        </div>
+
+        <!-- 今日時間進度條 -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">今日時光流轉印記</span>
+            <span class="progress-percent" id="dayProgressPercent">63.5%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="dayProgressBar"></div>
+          </div>
+          <div class="progress-footer">
+            <span id="dayProgressPassed">已走過 15 小時 14 分鐘</span>
+            <span id="dayProgressLeft">餘裕 8 小時 46 分鐘</span>
+          </div>
+        </div>
+
+        <!-- 底部快捷微工具 -->
+        <div class="quick-tools">
+          <button id="copyTimeBtn" class="tool-chip" title="複製目前時光戳記">
+            <i data-lucide="copy"></i>
+            <span>留存時刻</span>
+          </button>
+          <button id="toggleSecEffectBtn" class="tool-chip active" title="暖陽光暈開關">
+            <i data-lucide="sun"></i>
+            <span>暖陽光暈</span>
+          </button>
+          <button id="zenModeBtn" class="tool-chip" title="極簡靜讀模式">
+            <i data-lucide="book-open"></i>
+            <span>靜思專注</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="app-footer">
+      <p>專屬為 <strong>蕭宥瑄</strong> 凝鑄慢調時光 &bull; 願歲月溫柔以待</p>
+    </footer>
+  </div>
+
+  <!-- 編輯姓名彈窗 Modal -->
+  <div id="nameModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalTitle">文青空間自訂題字</h2>
+        <button id="closeModalBtn" class="modal-close" aria-label="關閉視窗">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="nameForm" class="modal-form">
+        <div class="input-group">
+          <label for="nameInput">您的名字或雅號</label>
+          <input type="text" id="nameInput" maxlength="20" placeholder="例如：蕭宥瑄" required autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label for="mottoInput">專屬書齋題字或生活心境</label>
+          <input type="text" id="mottoInput" maxlength="40" placeholder="例如：慢品人間煙火色，閒觀萬事歲月長" autocomplete="off">
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="resetDefaultsBtn" class="btn-secondary">恢復雅趣預設</button>
+          <button type="submit" class="btn-primary">典藏題字</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 提示 Toast 消息 -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">已複製時光戳記！</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
